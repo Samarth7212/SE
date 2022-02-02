@@ -38,7 +38,6 @@ Cases:
 */
 
 #include <iostream>
-#include <stack>
 using namespace std;
 
 class Tree;
@@ -51,7 +50,7 @@ private:
     static unsigned int leafCount;
 
 public:
-    static void nodeCT() { cout << "\nThe number of nodes in tree is: " << Node::nodeCount << endl; }
+    static void nodeCT() { cout << "The number of nodes in tree is: " << Node::nodeCount << endl; }
     static void leafCT() { cout << "\nThe number of leaves in tree is: " << Node::leafCount << endl; }
     static void setDef() { leafCount = nodeCount = 0; };
     friend class Tree;
@@ -61,7 +60,7 @@ public:
         left = right = NULL;
     };
     ~Node(){};
-    void erase(Node *);
+    void erase(Node *&);
 } *root1 = NULL, *root2 = NULL;
 
 class Tree
@@ -79,6 +78,51 @@ public:
     int height(Node *);
 } tree;
 
+template <typename T>
+class Stack
+{
+public:
+    class StackNode
+    {
+    private:
+        T data;
+        StackNode *next;
+
+    public:
+        friend class Stack;
+        StackNode(T &data)
+        {
+            this->data = data;
+            next = NULL;
+        }
+        StackNode() { next = NULL; }
+    };
+
+private:
+    StackNode *top;
+
+public:
+    Stack() { top = NULL; }
+    void push(T x)
+    {
+        StackNode *tmp = new StackNode(x);
+        tmp->next = top;
+        top = tmp;
+    };
+
+    T pop()
+    {
+        StackNode *tmp;
+        tmp = top;
+        auto x = tmp->data;
+        top = top->next;
+        delete tmp;
+        return x;
+    };
+
+    bool isEmpty() { return top == NULL ? 1 : 0; };
+};
+
 unsigned int Node::nodeCount = 0;
 unsigned int Node::leafCount = 0;
 
@@ -90,36 +134,41 @@ int main()
     tree.create(root1);
     while (menu)
     {
-        cout << "\n\nMENU\n1.INORDER TRAVERSAL\n2.PREORDER TRAVERSAL\n3.POSTORDER TRAVERSAL\n4.NUMBER OF LEAVES,NODES AND HEIGHT\n5.SWAP CHILDREN\n6.COPY TREE\n7.ERASE NODES\n8.ITERATIVE TRAVERSALS\n\nEnter your choice(-1 to exit): ";
+        cout << "\n\nMENU\n1.RECURSIVE TRAVERSAL\n2.ITERATIVE TRAVERSAL\n3.NUMBER OF LEAVES,NODES AND HEIGHT\n4.SWAP CHILDREN\n5.COPY TREE\n6.ERASE NODES\n\nEnter your choice(-1 to exit): ";
         cin >> choice;
         switch (choice)
         {
         case 1:
+            cout << "\nRECURSIVE TRAVERSALS:-";
             cout << "\nIN-ORDER TRAVERSAL: ";
             tree.inorder(root1);
-            break;
-
-        case 2:
             cout << "\nPRE-ORDER TRAVERSAL: ";
             tree.preorder(root1);
-            break;
-
-        case 3:
             cout << "\nPOST-ORDER TRAVERSAL: ";
             tree.postorder(root1);
             break;
 
-        case 4:
-            root1->leafCT();
-            root1->nodeCT();
-            cout << "\nHEIGHT: " << tree.height(root1);
+        case 2:
+            cout << "\nITERATIVE TRAVERSALS:-";
+            cout << "\nIN-ORDER: ";
+            tree.iterativeInorder(root1);
+            cout << "\nPRE-ORDER: ";
+            tree.iterativePreorder(root1);
+            cout << "\nPOST-ORDER: ";
+            tree.iterativePostorder(root1);
             break;
 
-        case 5:
+        case 3:
+            root1->leafCT();
+            root1->nodeCT();
+            cout << "HEIGHT: " << tree.height(root1);
+            break;
+
+        case 4:
             tree.swapChildren(root1);
             break;
 
-        case 6:
+        case 5:
             tree.copyTree(root2, root1);
             cout << "\nTree copied!";
             cout << "\nTraversals on copied tree: ";
@@ -131,18 +180,9 @@ int main()
             tree.postorder(root2);
             break;
 
-        case 7:
+        case 6:
             root1->erase(root1);
             root1->setDef();
-            break;
-
-        case 8:
-            cout << "\nIN-ORDER: ";
-            tree.iterativeInorder(root1);
-            cout << "\nPRE-ORDER: ";
-            tree.iterativePreorder(root1);
-            cout << "\nPOST-ORDER: ";
-            tree.iterativePostorder(root1);
             break;
 
         case -1:
@@ -221,7 +261,7 @@ int Tree::height(Node *rt)
         return y + 1;
 }
 
-void Node::erase(Node *temp)
+void Node::erase(Node *&temp)
 {
     if (Node::nodeCount == 0)
     {
@@ -306,32 +346,61 @@ void Tree::postorder(Node *root)
 
 void Tree::iterativePreorder(Node *p)
 {
-    
-    // if (root1->nodeCount == 0)
-    // {
-    //     cout << "\nTree does not exist!!!";
-    //     return;
-    // }
-    // stack<Node *> stk;
-    // while (p != nullptr || !stk.empty())
-    // {
-    //     if (p != nullptr)
-    //     {
-    //         cout << p->data << " ";
-    //         stk.emplace(p);
-    //         p = p->left;
-    //     }
-    //     else
-    //     {
-    //         p = stk.top();
-    //         stk.pop();
-    //         p = p->right;
-    //     }
-    // }
-    // cout << endl;
+    if (root1->nodeCount == 0)
+    {
+        cout << "\nTree does not exist!!!";
+        return;
+    }
+    Stack<Node *> st;
+    while (p != NULL || !st.isEmpty())
+    {
+        if (p != NULL)
+        {
+            cout << p->data << " ";
+            st.push(p);
+            p = p->left;
+        }
+        else
+        {
+            p = st.pop();
+            p = p->right;
+        }
+    }
 }
 
-void Tree::iterativePostorder(Node *p) {}
+void Tree::iterativePostorder(Node *p)
+{
+    if (root1->nodeCount == 0)
+    {
+        cout << "\nTree does not exist!!!";
+        return;
+    }
+    Stack<long long int> st;
+    long long int temp;
+    while (p != NULL || !st.isEmpty())
+    {
+        if (p != NULL)
+        {
+            st.push((long long int)p);
+            p = p->left;
+        }
+        else
+        {
+            temp = st.pop();
+            if (temp > 0)
+            {
+                st.push(-1 * temp);
+                p = (Node *)temp;
+                p = p->right;
+            }
+            else
+            {
+                cout << ((Node *)(-1 * temp))->data << " ";
+                p = NULL;
+            }
+        }
+    }
+}
 
 void Tree::iterativeInorder(Node *p)
 {
@@ -340,21 +409,19 @@ void Tree::iterativeInorder(Node *p)
         cout << "\nTree does not exist!!!";
         return;
     }
-    stack<Node *> stk;
-    while (p != nullptr || !stk.empty())
+    Stack<Node *> st;
+    while (p != NULL || !st.isEmpty())
     {
-        if (p != nullptr)
+        if (p != NULL)
         {
-            stk.emplace(p);
+            st.push(p);
             p = p->left;
         }
         else
         {
-            p = stk.top();
-            stk.pop();
+            p = st.pop();
             cout << p->data << " ";
             p = p->right;
         }
     }
-    cout << endl;
 }
