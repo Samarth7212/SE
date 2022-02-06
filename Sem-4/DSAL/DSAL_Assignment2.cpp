@@ -23,32 +23,42 @@ class Node
 
 public:
     friend class BinarySearchTree;
-    Node() {}
+    string capitalise(string &s)
+    {
+        for (auto &ch : s)
+            ch = (char)(ch & (~(1 << 5)));
+        return s;
+    }
+    Node()
+    {
+        keyword = meaning = "";
+        left = right = NULL;
+    }
     Node(string key, string meaning)
     {
-        this->keyword = key;
+        this->keyword = capitalise(key);
         this->meaning = meaning;
         left = right = NULL;
     }
-};
+    int count(Node *);
+    int height(Node *);
+} *root = NULL;
 
 class BinarySearchTree
 {
-    Node *root;
-    static unsigned int comparisons;
+    int comparisons;
 
 public:
-    BinarySearchTree() { root = NULL; }
+    BinarySearchTree() { comparisons = 0; }
     void insert(string, string);
     void insertRecursive(Node *);
-    void update();
-    void deleteKey();
+    void update(string, string);
+    void search(string);
+    Node *deleteKey(Node *, string);
     void showDataAsc();
     void showDataDes();
     static void showComparisons();
 } bst;
-
-unsigned int BinarySearchTree::comparisons = 0;
 
 int main()
 {
@@ -65,21 +75,31 @@ int main()
             cout << "\nEnter keyword: ";
             cin >> keyword;
             cout << "\nEnter meaning: ";
-            cin >> meaning;
-            // getline(cin, meaning);
+            cin.ignore();
+            getline(cin, meaning);
             bst.insert(keyword, meaning);
+            cout << "\nHeight: " << root->height(root) << endl;
             break;
 
         case 2:
-
+            cout << "\nEnter the keyword: ";
+            cin >> keyword;
+            cout << "\nEnter new meaning: ";
+            cin.ignore();
+            getline(cin, meaning);
+            bst.update(keyword, meaning);
             break;
 
         case 3:
-
+            cout << "\nEnter the keyword you want to delete: ";
+            cin >> keyword;
+            // bst.deleteKey(keyword);
             break;
 
         case 4:
-
+            cout << "\nEnter the keyword: ";
+            cin >> keyword;
+            bst.search(keyword);
             break;
 
         case -1:
@@ -91,14 +111,111 @@ int main()
             break;
         }
     }
-
     return 0;
+}
+
+void BinarySearchTree::search(string key)
+{
+    comparisons = 0;
+    string k = key;
+    key = root->capitalise(key);
+    Node *tmp = root;
+    while (tmp != NULL)
+    {
+        if (key < tmp->keyword)
+            tmp = tmp->left;
+        else if (key > tmp->keyword)
+            tmp = tmp->right;
+        else
+        {
+            cout << "\nThe meaning of " << k << " is given as " << tmp->meaning << endl;
+            cout << "Comarisons: " << BinarySearchTree::comparisons << endl;
+            return;
+        }
+        comparisons++;
+    }
+    cout << "\nThe meaning for " << k << " is not present in dictionary.";
+}
+
+int Node::count(Node *p)
+{
+    int x;
+    int y;
+    if (p != nullptr)
+    {
+        x = count(p->left);
+        y = count(p->right);
+        return x + y + 1;
+    }
+    return 0;
+}
+
+int Node::height(Node *p)
+{
+    int x, y;
+    if (p == NULL)
+        return 0;
+    x = height(p->left);
+    y = height(p->right);
+    return (x > y) ? x + 1 : y + 1;
+}
+
+
+
+Node *BinarySearchTree::deleteKey(Node *p, string key)
+{
+    Node *q;
+    if (p == NULL)
+        return NULL;
+    if (p->left == NULL && p->right == NULL)
+    {
+        if (p == root)
+            root = NULL;
+        delete p;
+        p = NULL;
+        return NULL;
+    }
+
+    if (key < p->keyword)
+        deleteKey(p->left, key);
+    else if (key > p->keyword)
+        deleteKey(p->right, key);
+    else
+    {
+        if (root->height(p->left) > root->height(p->right))
+        {
+
+        }
+    }
+
+    return p;
+}
+
+void BinarySearchTree::update(string key, string newMeaning)
+{
+    Node *tmp = root;
+    key = root->capitalise(key);
+    while (tmp != NULL)
+    {
+        if (tmp->keyword < key)
+            tmp = tmp->right;
+        else if (tmp->keyword > key)
+            tmp = tmp->left;
+        else
+        {
+            tmp->meaning = newMeaning;
+            cout << "\nMeaning updated";
+            return;
+        }
+    }
+    cout << "\nThe keyword " << key << " is not present in the dictionary!!!";
 }
 
 void BinarySearchTree::insert(string key, string meaning)
 {
     Node *rt = root;
     Node *tail = NULL, *tmp;
+    key = root->capitalise(key);
     if (root == NULL)
     {
         root = new Node(key, meaning);
@@ -109,7 +226,10 @@ void BinarySearchTree::insert(string key, string meaning)
     {
         tail = rt;
         if (key == rt->keyword)
+        {
+            cout << "\nKeyword already exists!!!";
             return;
+        }
         if (key > rt->keyword)
             rt = rt->right;
         else
