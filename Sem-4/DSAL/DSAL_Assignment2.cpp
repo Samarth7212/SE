@@ -41,7 +41,6 @@ public:
         left = right = NULL;
     }
     int count(Node *);
-    int height(Node *);
 } *root = NULL;
 
 class BinarySearchTree
@@ -50,13 +49,18 @@ class BinarySearchTree
 
 public:
     BinarySearchTree() { comparisons = 0; }
+    int height(Node *);
     void insert(string, string);
     void insertRecursive(Node *);
     void update(string, string);
     void search(string);
-    Node *deleteKey(Node *, string);
+    Node *getKey(Node *, string);
+    Node *deleteKey(Node *&, string);
     void showDataAsc();
     void showDataDes();
+    Node *inPred(Node *);
+    Node *inSucc(Node *);
+
     static void showComparisons();
 } bst;
 
@@ -69,6 +73,7 @@ int main()
         cout << "\n\nMENU\n1.ADD KEYWORD\n2.UPDATE KEYWORD\n3.DELETE KEYWORD\n4.SEARCH FOR A KEYWORD\nENTER YOUR CHOICE(-1 to exit): ";
         cin >> ch;
         string keyword, meaning;
+        Node *temp;
         switch (ch)
         {
         case 1:
@@ -78,7 +83,7 @@ int main()
             cin.ignore();
             getline(cin, meaning);
             bst.insert(keyword, meaning);
-            cout << "\nHeight: " << root->height(root) << endl;
+            cout << "\nHeight: " << bst.height(root) << endl;
             break;
 
         case 2:
@@ -93,7 +98,9 @@ int main()
         case 3:
             cout << "\nEnter the keyword you want to delete: ";
             cin >> keyword;
-            // bst.deleteKey(keyword);
+            temp = root;
+            temp = bst.getKey(temp, keyword);
+            bst.deleteKey(temp, keyword);
             break;
 
         case 4:
@@ -150,7 +157,7 @@ int Node::count(Node *p)
     return 0;
 }
 
-int Node::height(Node *p)
+int BinarySearchTree::height(Node *p)
 {
     int x, y;
     if (p == NULL)
@@ -160,9 +167,35 @@ int Node::height(Node *p)
     return (x > y) ? x + 1 : y + 1;
 }
 
+Node *BinarySearchTree::inPred(Node *p)
+{
+    while (p && p->right != NULL)
+        p = p->right;
+    return p;
+}
+Node *BinarySearchTree::inSucc(Node *p)
+{
+    while (p && p->left != NULL)
+        p = p->left;
+    return p;
+}
 
+Node *BinarySearchTree::getKey(Node *p, string key)
+{
+    key = root->capitalise(key);
+    while (p != NULL)
+    {
+        if (key > p->keyword)
+            p = p->right;
+        else if (key < p->keyword)
+            p = p->left;
+        else
+            return p;
+    }
+    return NULL;
+}
 
-Node *BinarySearchTree::deleteKey(Node *p, string key)
+Node *BinarySearchTree::deleteKey(Node *&p, string key)
 {
     Node *q;
     if (p == NULL)
@@ -182,9 +215,19 @@ Node *BinarySearchTree::deleteKey(Node *p, string key)
         deleteKey(p->right, key);
     else
     {
-        if (root->height(p->left) > root->height(p->right))
+        if (height(p->left) > height(p->right))
         {
-
+            q = inPred(p->left);
+            p->keyword = q->keyword;
+            p->meaning = q->meaning;
+            p->left = deleteKey(p->left, q->keyword);
+        }
+        else
+        {
+            q = inSucc(p->right);
+            p->keyword = q->keyword;
+            p->meaning = q->meaning;
+            p->right = deleteKey(p->right, q->keyword);
         }
     }
 
