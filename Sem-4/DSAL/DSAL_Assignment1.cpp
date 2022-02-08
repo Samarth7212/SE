@@ -13,9 +13,6 @@
     Erase all nodes in a binary tree.
     (implement both recursive and non-recursive methods)
 
-*/
-
-/*
 Cases:
                     10                      1
         15                      12          2

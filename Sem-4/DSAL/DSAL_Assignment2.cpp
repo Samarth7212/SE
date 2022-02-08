@@ -51,7 +51,7 @@ public:
     BinarySearchTree() { comparisons = 0; }
     int height(Node *);
     void insert(string, string);
-    void insertRecursive(Node *);
+    // void insertRecursive(Node *);
     void update(string, string);
     void search(string);
     Node *getKey(Node *, string);
@@ -198,6 +198,7 @@ Node *BinarySearchTree::getKey(Node *p, string key)
 Node *BinarySearchTree::deleteKey(Node *&p, string key)
 {
     Node *q;
+    key = root->capitalise(key);
     if (p == NULL)
         return NULL;
     if (p->left == NULL && p->right == NULL)
@@ -205,7 +206,7 @@ Node *BinarySearchTree::deleteKey(Node *&p, string key)
         if (p == root)
             root = NULL;
         delete p;
-        p = NULL;
+        // p = NULL;
         return NULL;
     }
 
