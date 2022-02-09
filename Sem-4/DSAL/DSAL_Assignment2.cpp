@@ -23,6 +23,8 @@ class Node
 
 public:
     friend class BinarySearchTree;
+    static unsigned int nodeCount;
+    static void decrement() { nodeCount--; }
     string capitalise(string &s)
     {
         for (auto &ch : s)
@@ -46,23 +48,26 @@ public:
 class BinarySearchTree
 {
     int comparisons;
+    string arr[50];
+    int ind = 0;
 
 public:
     BinarySearchTree() { comparisons = 0; }
     int height(Node *);
     void insert(string, string);
-    // void insertRecursive(Node *);
     void update(string, string);
     void search(string);
     Node *getKey(Node *, string);
     Node *deleteKey(Node *&, string);
-    void showDataAsc();
-    void showDataDes();
+    void showData(Node *, bool);
+    void inOrder(Node *);
     Node *inPred(Node *);
     Node *inSucc(Node *);
 
     static void showComparisons();
 } bst;
+
+unsigned int Node::nodeCount = 0;
 
 int main()
 {
@@ -70,7 +75,7 @@ int main()
     int ch;
     while (menu)
     {
-        cout << "\n\nMENU\n1.ADD KEYWORD\n2.UPDATE KEYWORD\n3.DELETE KEYWORD\n4.SEARCH FOR A KEYWORD\nENTER YOUR CHOICE(-1 to exit): ";
+        cout << "\n\nMENU\n1.ADD KEYWORD\n2.UPDATE KEYWORD\n3.DELETE KEYWORD\n4.SEARCH FOR A KEYWORD\n5.KEYWORDS IN ASCENDING AND DESCENDING ORDER\nENTER YOUR CHOICE(-1 to exit): ";
         cin >> ch;
         string keyword, meaning;
         Node *temp;
@@ -101,12 +106,20 @@ int main()
             temp = root;
             temp = bst.getKey(temp, keyword);
             bst.deleteKey(temp, keyword);
+            Node::decrement();
             break;
 
         case 4:
             cout << "\nEnter the keyword: ";
             cin >> keyword;
             bst.search(keyword);
+            break;
+
+        case 5:
+            cout << "\nKeywords in ascending order: \n";
+            bst.showData(root, 1);
+            cout << "\nKeywords in descending order: \n";
+            bst.showData(root, 0);
             break;
 
         case -1:
@@ -119,6 +132,35 @@ int main()
         }
     }
     return 0;
+}
+
+void BinarySearchTree::showData(Node *root, bool a)
+{
+    // arr = new string[Node::nodeCount];
+    inOrder(root);
+    if (a)
+    {
+        for (int i = 0; i <= Node::nodeCount;i++)
+            cout << arr[i] << " ";
+    }
+    else
+    {
+        for (int i = Node::nodeCount; i >= 0;i--)
+            cout << arr[i] << " ";
+    }
+    cout << endl;
+    ind = 0;
+}
+
+void BinarySearchTree::inOrder(Node *root)
+{
+    if (root)
+    {
+        inOrder(root->left);
+        if (ind <= Node::nodeCount)
+            arr[ind++] = root->keyword;
+        inOrder(root->right);
+    }
 }
 
 void BinarySearchTree::search(string key)
@@ -206,7 +248,7 @@ Node *BinarySearchTree::deleteKey(Node *&p, string key)
         if (p == root)
             root = NULL;
         delete p;
-        // p = NULL;
+        p = NULL;
         return NULL;
     }
 
@@ -280,6 +322,7 @@ void BinarySearchTree::insert(string key, string meaning)
             rt = rt->left;
     }
     tmp = new Node(key, meaning);
+    Node::nodeCount++;
     if (tmp->keyword < tail->keyword)
         tail->left = tmp;
     else
