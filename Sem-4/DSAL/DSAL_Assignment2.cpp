@@ -8,6 +8,8 @@
     Also find how many maximum comparisons may require for finding any keyword. Use Binary Search Tree for
     implementation.
 
+    Date of completion: 10/02/2022
+
 */
 
 #include <iostream>
@@ -68,7 +70,6 @@ public:
 } bst;
 
 unsigned int Node::nodeCount = 0;
-
 int main()
 {
     bool menu = 1;
@@ -137,6 +138,7 @@ int main()
 void BinarySearchTree::showData(Node *root, bool a)
 {
     // arr = new string[Node::nodeCount];
+    ind = 0;
     inOrder(root);
     if (a)
     {
@@ -171,6 +173,7 @@ void BinarySearchTree::search(string key)
     Node *tmp = root;
     while (tmp != NULL)
     {
+        comparisons++;
         if (key < tmp->keyword)
             tmp = tmp->left;
         else if (key > tmp->keyword)
@@ -178,10 +181,9 @@ void BinarySearchTree::search(string key)
         else
         {
             cout << "\nThe meaning of " << k << " is given as " << tmp->meaning << endl;
-            cout << "Comarisons: " << BinarySearchTree::comparisons << endl;
+            cout << "Comparisons: " << BinarySearchTree::comparisons << endl;
             return;
         }
-        comparisons++;
     }
     cout << "\nThe meaning for " << k << " is not present in dictionary.";
 }
@@ -225,14 +227,30 @@ Node *BinarySearchTree::inSucc(Node *p)
 Node *BinarySearchTree::getKey(Node *p, string key)
 {
     key = root->capitalise(key);
+    Node *tail = NULL;
     while (p != NULL)
     {
         if (key > p->keyword)
+        {
+            tail = p;
             p = p->right;
+        }
         else if (key < p->keyword)
+        {
+            tail = p;
             p = p->left;
+        }
         else
+        {
+            if (p->left == NULL && p->right == NULL)
+            {
+                if (tail->left == p)
+                    tail->left = NULL;
+                else
+                    tail->right = NULL;
+            }
             return p;
+        }
     }
     return NULL;
 }
@@ -251,7 +269,6 @@ Node *BinarySearchTree::deleteKey(Node *&p, string key)
         p = NULL;
         return NULL;
     }
-
     if (key < p->keyword)
         deleteKey(p->left, key);
     else if (key > p->keyword)
