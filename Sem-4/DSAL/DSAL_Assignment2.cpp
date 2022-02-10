@@ -140,12 +140,12 @@ void BinarySearchTree::showData(Node *root, bool a)
     inOrder(root);
     if (a)
     {
-        for (int i = 0; i <= Node::nodeCount;i++)
+        for (int i = 0; i <= Node::nodeCount; i++)
             cout << arr[i] << " ";
     }
     else
     {
-        for (int i = Node::nodeCount; i >= 0;i--)
+        for (int i = Node::nodeCount; i >= 0; i--)
             cout << arr[i] << " ";
     }
     cout << endl;
