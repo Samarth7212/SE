@@ -64,7 +64,7 @@ _start:
 	IO 01, 01, out2, lo2
 	
 	mov al, byte[cntn]
-	cmp al, 30H
+	cmp al, 09H
 	jbe l3
 	add al, 07H
 	l3: add al, 30H
