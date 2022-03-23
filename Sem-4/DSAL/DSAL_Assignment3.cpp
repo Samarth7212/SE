@@ -40,6 +40,7 @@ public:
 	Node *insert(Node *);
 	void inOrder(Node *);
 	void preOrder(Node *);
+	void deleteNode(Node *, int);
 	void createHead()
 	{
 		head = new Node;
@@ -51,7 +52,7 @@ public:
 	{
 		if (tmp == NULL)
 			return NULL;
-		while (tmp->right != NULL)
+		while (tmp->right != NULL && tmp->rbit)
 			tmp = tmp->right;
 		return tmp;
 	}
@@ -59,11 +60,10 @@ public:
 	{
 		if (tmp == NULL)
 			return NULL;
-		while (tmp->left != NULL)
+		while (tmp->left != NULL && tmp->lbit)
 			tmp = tmp->left;
 		return tmp;
 	}
-
 	void lastLinks(Node *root)
 	{
 		Node *tmp = root;
@@ -176,6 +176,70 @@ void Threaded_BT::preOrder(Node *rt)
 	}
 }
 
+void Threaded_BT::deleteNode(Node *rt, int data)
+{
+	if (rt == NULL)
+	{
+		cout << "\nNO TREE EXISTS!!!\n";
+		return;
+	}
+	Node *temp = rt;
+	Node *foundNode = NULL;
+	while (temp->data != data && temp != NULL)
+	{
+		if (data < temp->data)
+			temp = temp->left;
+		else if (data > temp->data)
+			temp = temp->right;
+		else if (data == temp->data)
+			break;
+	}
+	foundNode = temp;
+	Node *temp2 = NULL;
+	while (temp->lbit)
+	{
+		if (temp->lbit)
+		{
+			temp2 = inPred(temp->left);
+			temp->data = temp2->data;
+			temp = temp2;
+		}
+		else
+			break;
+	}
+	Node *leafPred = temp->left;
+	Node *leafSucc = temp->right;
+	// leafPred->right = NULL;
+	if (leafPred->right == temp)
+	{
+		leafPred->right = NULL;
+		leafPred->right = temp->right;
+		leafPred->rbit = 0;
+	}
+	if (leafSucc->left == temp)
+	{
+		leafSucc->left = NULL;
+		leafSucc->left = temp->left;
+		leafSucc->lbit = 0;
+	}
+	temp->left = temp->right = NULL;
+	delete temp;
+	temp = NULL;
+	// while (foundNode->lbit)
+	// {
+	// 	if (foundNode->lbit)
+	// 	{
+	// 		temp = inPred(foundNode->left);
+	// 		if (temp->rbit)
+	// 		{
+	// 			temp->right = foundNode;
+	// 			temp->rbit = 0;
+	// 		}
+	// 		foundNode = temp;
+	// 	}
+	// }
+}
+
 int main()
 {
 	bool menu = 1;
@@ -200,7 +264,12 @@ int main()
 		case 3:
 			TBT.preOrder(root);
 			break;
-
+		case 4:
+			int dt;
+			cout << "\nEnter data: ";
+			cin >> dt;
+			TBT.deleteNode(root, dt);
+			break;
 		case -1:
 			menu = 0;
 			break;
