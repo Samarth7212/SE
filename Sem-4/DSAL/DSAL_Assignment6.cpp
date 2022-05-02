@@ -56,11 +56,11 @@ public:
         top = tmp;
     };
 
-    T pop()
+    int pop()
     {
         Node *tmp;
         tmp = top;
-        auto x = tmp;
+        auto x = tmp->data;
         top = top->next;
         delete tmp;
         return x;
@@ -128,22 +128,36 @@ void Graph::DFS()
     curr = curr->next;
     while (curr != nullptr || !st.isEmpty())
     {
-        if (curr != nullptr)
+        if (!isVisited[curr->data])
         {
-            if (!isVisited[curr->data])
-            {
-                cout << curr->data << ',' << sp;
-                isVisited[curr->data] = true;
-                st.push(curr);
-                curr = arr[curr->data];
-                curr = curr->next;
-            }
-            else
-                curr = curr->next;
+            cout << curr->data << ',' << sp;
+            isVisited[curr->data] = true;
+            st.push(curr);
+            curr = arr[curr->data];
+            curr = curr->next;
         }
-        else
-            curr = st.pop();
+        // else
+        //     curr =st.top;
     }
+
+    // while (curr != nullptr || !st.isEmpty())
+    // {
+    //     if (curr != nullptr)
+    //     {
+    //         if (!isVisited[curr->data])
+    //         {
+    //             cout << curr->data << ',' << sp;
+    //             isVisited[curr->data] = true;
+    //             st.push(curr);
+    //             curr = arr[curr->data];
+    //             curr = curr->next;
+    //         }
+    //         else
+    //             curr = curr->next;
+    //     }
+    //     else
+    // curr = st.pop();
+    // }
 }
 
 void Graph::takeInput()
