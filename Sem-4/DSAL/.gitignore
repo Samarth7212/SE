@@ -1,3 +1,5 @@
-*.exe
-Practice
 DSAL_Assignment6.cpp
+*.exe
+!*.cpp
+Practice
+.vscode

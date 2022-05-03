@@ -69,13 +69,75 @@ public:
     bool isEmpty() { return top == NULL ? 1 : 0; };
 };
 
+class Queue
+{
+public:
+    class qNode
+    {
+    private:
+        int data;
+        qNode *next;
+
+    public:
+        friend class Queue;
+        qNode()
+        {
+            data = -1;
+            next = nullptr;
+        }
+        qNode(int x)
+        {
+            data = x;
+            next = nullptr;
+        }
+    };
+    Queue() { front = back = nullptr; }
+
+private:
+    qNode *front;
+    qNode *back;
+
+public:
+    bool isEmpty() { return (front == nullptr && back == nullptr ? 1 : 0); }
+
+    void enqueue(int x)
+    {
+        qNode *temp;
+        temp = new qNode(x);
+        if (front == nullptr && back == nullptr)
+        {
+            front = back = temp;
+            return;
+        }
+        back->next = temp;
+        back = temp;
+    }
+
+    int dequeue()
+    {
+        qNode *temp = front;
+        front = front->next;
+        int x = temp->data;
+        if (front == nullptr)
+            back = nullptr;
+        delete temp;
+        return x;
+    }
+
+    int frontElement()
+    {
+        if (front != nullptr)
+            return front->data;
+        return -1;
+    }
+};
+
 class Graph
 {
 private:
     int vertices;
     int edges;
     Node **arr;
-    // Node *arr;
 
 public:
     Graph() { vertices = edges = -1; };
@@ -87,28 +149,32 @@ public:
 
 void Graph::BFS()
 {
-    Stack<Node *> st;
     cout << "BFS for given graph: ";
     bool isVisited[vertices];
     for (int i = 0; i < vertices; i++)
         isVisited[i] = false;
-    for (int i = 0; i < vertices; i++)
+    Node *curr = arr[0];
+    Queue q;
+    q.enqueue(curr->data);
+    isVisited[curr->data] = true;
+    while (!q.isEmpty())
     {
-        Node *curr = arr[i];
-        // curr = curr->link;
+        int x = q.frontElement();
+        if (x != -1)
+            cout << x << ", ";
+        q.dequeue();
+        curr = arr[x];
         while (curr != nullptr)
         {
-            if (curr != nullptr)
+            if (!isVisited[curr->data])
             {
-                if (!isVisited[curr->data])
-                {
-                    cout << curr->data << ',' << sp;
-                    isVisited[curr->data] = true;
-                }
-                curr = curr->next;
+                isVisited[curr->data] = true;
+                q.enqueue(curr->data);
             }
+            curr = curr->next;
         }
     }
+    cout << endl;
 }
 
 void Graph::DFS()
@@ -139,25 +205,6 @@ void Graph::DFS()
         // else
         //     curr =st.top;
     }
-
-    // while (curr != nullptr || !st.isEmpty())
-    // {
-    //     if (curr != nullptr)
-    //     {
-    //         if (!isVisited[curr->data])
-    //         {
-    //             cout << curr->data << ',' << sp;
-    //             isVisited[curr->data] = true;
-    //             st.push(curr);
-    //             curr = arr[curr->data];
-    //             curr = curr->next;
-    //         }
-    //         else
-    //             curr = curr->next;
-    //     }
-    //     else
-    // curr = st.pop();
-    // }
 }
 
 void Graph::takeInput()
