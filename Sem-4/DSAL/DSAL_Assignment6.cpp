@@ -89,33 +89,6 @@ public:
 
     bool isEmpty() { return (top == nullptr ? 1 : 0); }
 };
-// template <typename T>
-// class Stack
-// {
-// private:
-//     Node *top;
-
-// public:
-//     Stack() { top = NULL; }
-//     void push(T x)
-//     {
-//         Node *tmp = new Node(x->data, x->name);
-//         tmp->next = top;
-//         top = tmp;
-//     };
-
-//     int pop()
-//     {
-//         Node *tmp;
-//         tmp = top;
-//         auto x = tmp->data;
-//         top = top->next;
-//         delete tmp;
-//         return x;
-//     };
-
-//     bool isEmpty() { return top == NULL ? 1 : 0; };
-// };
 
 class Queue
 {
@@ -224,23 +197,7 @@ void Graph::BFS()
     }
     cout << endl;
 }
-/*
-    void dfs(int vertexNo)
-    {
-        cout << "At node " << vertexNo << "\n";
-        visitedList[vertexNo] = true;
-        Node *temp = adjList[vertexNo];
-        while (temp)
-        {
-            if (!visitedList[temp->vertexNumber])
-            {
-                dfs(temp->vertexNumber);
-            }
-            temp = temp->next;
-        }
-        return;
-    }
-*/
+
 void Graph::DFS()
 {
     cout << "DFS for given graph: ";
