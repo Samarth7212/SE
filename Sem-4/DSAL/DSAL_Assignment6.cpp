@@ -41,33 +41,81 @@ public:
     }
 };
 
-template <typename T>
 class Stack
 {
+public:
+    class stackNode
+    {
+        int data;
+        stackNode *next;
+
+    public:
+        friend class Stack;
+        stackNode() { next = nullptr; }
+        stackNode(int x)
+        {
+            data = x;
+            ;
+            next = nullptr;
+        }
+    };
+
 private:
-    Node *top;
+    stackNode *top;
 
 public:
-    Stack() { top = NULL; }
-    void push(T x)
+    Stack() { top = nullptr; }
+    void push(int x)
     {
-        Node *tmp = new Node(x->data, x->name);
-        tmp->next = top;
-        top = tmp;
-    };
+        stackNode *temp = new stackNode(x);
+        if (top == nullptr)
+        {
+            top = temp;
+            return;
+        }
+        temp->next = top;
+        top = temp;
+    }
 
-    int pop()
+    void pop()
     {
-        Node *tmp;
-        tmp = top;
-        auto x = tmp->data;
+        stackNode *temp = top;
         top = top->next;
-        delete tmp;
-        return x;
-    };
+        delete temp;
+        temp = nullptr;
+    }
 
-    bool isEmpty() { return top == NULL ? 1 : 0; };
+    int stackTop() { return ((top != nullptr) ? top->data : -1); }
+
+    bool isEmpty() { return (top == nullptr ? 1 : 0); }
 };
+// template <typename T>
+// class Stack
+// {
+// private:
+//     Node *top;
+
+// public:
+//     Stack() { top = NULL; }
+//     void push(T x)
+//     {
+//         Node *tmp = new Node(x->data, x->name);
+//         tmp->next = top;
+//         top = tmp;
+//     };
+
+//     int pop()
+//     {
+//         Node *tmp;
+//         tmp = top;
+//         auto x = tmp->data;
+//         top = top->next;
+//         delete tmp;
+//         return x;
+//     };
+
+//     bool isEmpty() { return top == NULL ? 1 : 0; };
+// };
 
 class Queue
 {
@@ -176,35 +224,53 @@ void Graph::BFS()
     }
     cout << endl;
 }
-
+/*
+    void dfs(int vertexNo)
+    {
+        cout << "At node " << vertexNo << "\n";
+        visitedList[vertexNo] = true;
+        Node *temp = adjList[vertexNo];
+        while (temp)
+        {
+            if (!visitedList[temp->vertexNumber])
+            {
+                dfs(temp->vertexNumber);
+            }
+            temp = temp->next;
+        }
+        return;
+    }
+*/
 void Graph::DFS()
 {
     cout << "DFS for given graph: ";
-    Stack<Node *> st;
     bool isVisited[vertices];
+    Node *first = arr[0];
+    Node *curr = nullptr;
     for (int i = 0; i < vertices; i++)
         isVisited[i] = false;
+    Stack st;
 
-    Node *curr = arr[0];
-    if (!isVisited[curr->data])
+    st.push(first->data);
+    isVisited[first->data] = true;
+    while (!st.isEmpty())
     {
-        cout << curr->data << ',' << sp;
-        isVisited[curr->data] = true;
-    }
-    curr = curr->next;
-    while (curr != nullptr || !st.isEmpty())
-    {
-        if (!isVisited[curr->data])
+        int x = st.stackTop();
+        if (x != -1)
+            cout << x << ", ";
+        st.pop();
+        curr = arr[x];
+        while (curr != nullptr)
         {
-            cout << curr->data << ',' << sp;
-            isVisited[curr->data] = true;
-            st.push(curr);
-            curr = arr[curr->data];
+            if (!isVisited[curr->data])
+            {
+                isVisited[curr->data] = true;
+                st.push(curr->data);
+            }
             curr = curr->next;
         }
-        // else
-        //     curr =st.top;
     }
+    cout << endl;
 }
 
 void Graph::takeInput()
@@ -227,7 +293,7 @@ void Graph::takeInput()
             if (arr[i] == nullptr)
             {
                 cout << "\nEnter data for " << i << endl;
-                cout << "\nLandmark for node" << i << ": ";
+                cout << "\nLandmark for node-" << i << ": ";
                 cin >> s;
                 arr[i] = new Node(i, s);
                 continue;
