@@ -55,7 +55,6 @@ public:
         stackNode(int x)
         {
             data = x;
-            ;
             next = nullptr;
         }
     };
