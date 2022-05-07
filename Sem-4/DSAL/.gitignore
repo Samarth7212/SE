@@ -1,4 +1,2 @@
-*.exe
 !*.cpp
-Practice
 .vscode
