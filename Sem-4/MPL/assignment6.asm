@@ -11,68 +11,128 @@ section .data
 isProtectedMode: dq "Protected Mode",0x0A
 len1: equ $-isProtectedMode
 
-limit: dq "Limit is "
-lenLimit: equ $-limit
-
-ba: dq "Base address is "
-baLimit: equ $-ba
-
 isRealMode: dq "Real Mode", 0x0A
 len2: equ $-isRealMode
+
+gdt_msg db 10,'GDT: '
+gdt_len:equ $-gdt_msg
+
+ldt_msg db 10,'LDT: '
+ldt_len:equ $-ldt_msg
+
+idt_msg db 10,'IDT: '
+idt_len:equ $-idt_msg
+
+tr_msg db 10,'Task: '
+tr_len: equ $-tr_msg
+
+msw_msg db 10,'MSW: '
+msw_len:equ $-msw_msg
+
+colmsg db ':'
 
 newLine: db "",0x0A
 len: equ $-newLine
 
 section .bss
-GDTR: resq 1
-GDT: resq 1
-RESULT: resb 1
-cnt: resb 1
+
+gdt: resd 1 
+ldt: resw 1
+idt: resd 1
+tr:  resw 1
+cr0_data resd 1
+Result resb 04
 
 section .text
 global _start
-
 _start:
-	SMSW RAX
-	BT RAX, 0
+	IO 01, 01, newLine, len
+	SMSW rax
+	BT rax, 0
 	JC l1
 	JNC l2
 	l1:
 		IO 01, 01, isProtectedMode, len1
-		JMP l3
+		JMP GDTR_Printing
 	l2:
 		IO 01, 01, isRealMode, len2
-	l3:
-		;GDTR
-		SGDT [GDT]
-		MOV AX, word[GDT]
-		CALL HexToASCII
-		IO 01, 01, limit, lenLimit
-		IO 01, 01, RESULT, 4
-		IO 01, 01, newLine, len
-		IO 01, 01, ba, baLimit
-		IO 01, 01, RESULT+4, 8
-	MOV RAX, 60
-	MOV RDI, 00
-	SYSCALL
+GDTR_Printing: 
+	sgdt [gdt]
+ 	IO 01, 01, gdt_msg, gdt_len
+ 
+ 	mov bx,[gdt+4]
+ 	call HexToASCII
+
+ 	mov bx,[gdt+2]
+ 	call HexToASCII
+
+ 	IO 01, 01, colmsg, 1
+
+ 	mov bx,[gdt]
+ 	call HexToASCII
+
+LDTR_Printing:
+ 	sldt [ldt]
+ 	IO 01, 01, ldt_msg, ldt_len
+ 	mov bx,[ldt]
+ 	call HexToASCII
+
+IDTR_Printing:
+ 	sidt [idt]
+ 	IO 01, 01, idt_msg, idt_len
+ 
+ 	mov bx,[idt+4]
+ 	call HexToASCII
+
+ 	mov bx,[idt+2]
+ 	call HexToASCII
+
+ 	IO 01, 01, colmsg, 1
+
+ 	mov bx,[idt]
+ 	call HexToASCII
+
+TR_Printing:
+ 	str [tr]
+ 	IO 01, 01, tr_msg, tr_len
+ 
+ 	mov bx,[tr]
+ 	call HexToASCII
+
+ 	IO 01, 01, msw_msg, msw_len
+ 
+ 	mov bx,[cr0_data+2]
+ 	call HexToASCII
+
+ 	mov bx,[cr0_data]
+ 	call HexToASCII
+
+ 	IO 01, 01, newLine, len
+
+	mov rax, 60
+	mov rdi, 00
+ 	syscall
 
 HexToASCII:
-	MOV byte[cnt], 0x04
-	MOV RSI, RESULT
+ 	mov rsi,Result
+ 	mov rcx,04 
+
 	continue:
-		rol ax, 2
-		mov bl, al
-		and bl, 0x0F
-		cmp bl, 09H
-		jbe lll
-		add bl, 07H
-		lll:
-			add bl, 30H
-		mov [RSI], bl
-		inc RSI
-		dec byte[cnt]
-		jnz continue
-	RET
+ 		rol bx,4
+ 		mov dl,bl
+ 		and dl,0fh
+ 		add dl,30h
+ 		cmp dl,39h
+ 		jbe continue2 
+ 		add dl,07h
+		continue2:
+ 			mov [rsi],dl
+ 			inc rsi
+ 			loop continue
+ 		IO 01, 01, Result, 4 ;printlay the number from buffer
+ 		ret
+	
+	
 
 
 
