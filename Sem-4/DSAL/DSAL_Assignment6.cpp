@@ -261,7 +261,7 @@ void Graph::takeInput()
                 cin >> x;
                 if (x == -1)
                     continue;
-                cout << "Landmark for node " << i << ": ";
+                cout << "Landmark for node " << x << ": ";
                 cin >> s;
                 curr = *(arr + i);
                 while (curr->next != nullptr)
@@ -308,3 +308,129 @@ int main()
 
     return 0;
 }
+/*
+
+MENU
+1.Enter graph
+2.BFS
+3.DFS
+Enter your choice(-1 to exit): 1
+
+Enter number of vertices: 5
+
+Enter number of edges: 7
+
+Enter data for 0
+
+Landmark for node-0: 0
+
+Enter adjacent landmarks for 0
+Data(-1 to go to next landmark): 1
+Landmark for node 1: 1
+
+Enter adjacent landmarks for 0
+Data(-1 to go to next landmark): 2
+Landmark for node 2: 2
+
+Enter adjacent landmarks for 0
+Data(-1 to go to next landmark): -1
+
+Enter data for 1
+
+Landmark for node-1: 2
+
+Enter adjacent landmarks for 1
+Data(-1 to go to next landmark): 0
+Landmark for node 0: 0
+
+Enter adjacent landmarks for 1
+Data(-1 to go to next landmark): 2
+Landmark for node 2: 2
+
+Enter adjacent landmarks for 1
+Data(-1 to go to next landmark): 3
+Landmark for node 3: 3
+
+Enter adjacent landmarks for 1
+Data(-1 to go to next landmark): 4
+Landmark for node 4: 4
+
+Enter adjacent landmarks for 1
+Data(-1 to go to next landmark): -1
+
+Enter data for 2
+
+Landmark for node-2: 2
+
+Enter adjacent landmarks for 2
+Data(-1 to go to next landmark): 0
+Landmark for node 0: 0
+
+Enter adjacent landmarks for 2
+Data(-1 to go to next landmark): 1
+Landmark for node 1: 1
+
+Enter adjacent landmarks for 2
+Data(-1 to go to next landmark): 4
+Landmark for node 4: 4
+
+Enter adjacent landmarks for 2
+Data(-1 to go to next landmark): -1
+
+Enter data for 3
+
+Landmark for node-3: 3
+
+Enter adjacent landmarks for 3
+Data(-1 to go to next landmark): 1
+Landmark for node 1: 1
+
+Enter adjacent landmarks for 3
+Data(-1 to go to next landmark): 4
+Landmark for node 4: 4
+
+Enter adjacent landmarks for 3
+Data(-1 to go to next landmark): -1
+
+Enter data for 4
+
+Landmark for node-4: 4
+
+Enter adjacent landmarks for 4
+Data(-1 to go to next landmark): 1
+Landmark for node 1: 1
+
+Enter adjacent landmarks for 4
+Data(-1 to go to next landmark): 2
+Landmark for node 2: 2
+
+Enter adjacent landmarks for 4
+Data(-1 to go to next landmark): 3
+Landmark for node 3: 3
+
+Enter adjacent landmarks for 4
+Data(-1 to go to next landmark): -1
+
+
+MENU
+1.Enter graph
+2.BFS
+3.DFS
+Enter your choice(-1 to exit): 2
+BFS for given graph: 0, 1, 2, 3, 4, 
+
+
+MENU
+1.Enter graph
+2.BFS
+3.DFS
+Enter your choice(-1 to exit): 3
+DFS for given graph: 0, 2, 4, 3, 1, 
+
+
+MENU
+1.Enter graph
+2.BFS
+3.DFS
+Enter your choice(-1 to exit): -1
+*/

@@ -104,3 +104,113 @@ int main()
 
     return 0;
 }
+/*
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 98
+98 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 23
+98 23 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 78
+98 23 78 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 25
+98 25 78 23 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 99
+99 98 78 23 25 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 69
+99 98 78 23 25 69 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 21
+99 98 78 23 25 69 21 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 28
+99 98 78 28 25 69 21 23 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 79
+99 98 78 79 25 69 21 23 28 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 77
+99 98 78 79 77 69 21 23 28 25 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 22
+99 98 78 79 77 69 21 23 28 25 22 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 1
+
+Enter element: 1
+99 98 78 79 77 69 21 23 28 25 22 1 
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: 2
+
+Heap sort: 1 21 22 23 25 28 69 77 78 79 98 99 
+
+
+MENU
+1.Insert
+2.Heap-Sort
+ENTER: -1
+*/

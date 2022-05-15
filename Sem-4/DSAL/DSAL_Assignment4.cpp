@@ -224,3 +224,58 @@ int main()
     }
     return 0;
 }
+/*
+1.Make an entry
+2.Remove an entry
+3.Display
+4.Search
+Enter choice: 1
+
+Enter contact number: 9146697212
+
+Enter your name: Samarth
+
+Enter 1 to enter without replacement
+Enter 2 to enter with replacement
+Enter: 2
+
+1.Make an entry
+2.Remove an entry
+3.Display
+4.Search
+Enter choice: 1
+
+Enter contact number: 9146697411
+
+Enter your name: User
+
+Enter 1 to enter without replacement
+Enter 2 to enter with replacement
+Enter: 2
+
+1.Make an entry
+2.Remove an entry
+3.Display
+4.Search
+Enter choice: 3
+At index 27: Phone number- 9146697212 Name- Samarth
+At index 28: Phone number- 9146697411 Name- User
+
+1.Make an entry
+2.Remove an entry
+3.Display
+4.Search
+Enter choice: 4
+
+ENter: 9146697212
+
+FOUND 9146697212 at index 27
+The comparisons required were 0
+
+1.Make an entry
+2.Remove an entry
+3.Display
+4.Search
+Enter choice: -1
+
+*/

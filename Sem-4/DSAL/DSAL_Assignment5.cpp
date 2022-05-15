@@ -246,3 +246,126 @@ int main()
 
     return 0;
 }
+/*
+MENU
+1.Insert
+2.Find
+3.Delete
+4.Display HashTable
+Enter your choice: 1
+
+Enter word: C++
+
+Enter value: Programming language
+
+Word added to dictionary.
+MENU
+1.Insert
+2.Find
+3.Delete
+4.Display HashTable
+Enter your choice: 1
+
+Enter word: Python
+
+Enter value: Language
+
+Word added to dictionary.
+MENU
+1.Insert
+2.Find
+3.Delete
+4.Display HashTable
+Enter your choice: 1
+
+Enter word: for
+
+Enter value: Keyword
+
+Word added to dictionary.
+MENU
+1.Insert
+2.Find
+3.Delete
+4.Display HashTable
+Enter your choice: 1
+
+Enter word: IJ
+
+Enter value: IJ
+
+Word added to dictionary.
+MENU
+1.Insert
+2.Find
+3.Delete
+4.Display HashTable
+Enter your choice: 1
+
+Enter word: HK
+
+Enter value: HK
+
+Word added to dictionary.
+MENU
+1.Insert
+2.Find
+3.Delete
+4.Display HashTable
+Enter your choice: 2
+
+Enter word: python
+Key found!
+
+python
+Meaning: Language
+Number of comparisons: 1
+
+MENU
+1.Insert
+2.Find
+3.Delete
+4.Display HashTable
+Enter your choice: 3
+
+Enter word: for
+
+MENU
+1.Insert
+2.Find
+3.Delete
+4.Display HashTable
+Enter your choice: 2
+
+Enter word: for
+Key not found! 
+Number of comparisons: 1
+
+MENU
+1.Insert
+2.Find
+3.Delete
+4.Display HashTable
+Enter your choice: 4
+
+Bucket-48:
+Node Count: 2
+1: IJ 2: HK 
+
+Bucket-86:
+Node Count: 1
+1: PYTHON 
+
+Bucket-89:
+Node Count: 1
+1: C
+
+     
+
+MENU
+1.Insert
+2.Find
+3.Delete
+4.Display HashTable
+Enter your choice: -1
+*/

@@ -178,3 +178,44 @@ int main()
     }
     return 0;
 }
+/*
+1.Enter graph
+2.Get path
+Enter choice: 1
+
+Enter vertices: 7
+Enter edges: 9
+Enter cost between office-1 and office-2: 25
+Enter cost between office-1 and office-3: -1
+Enter cost between office-1 and office-4: -1
+Enter cost between office-1 and office-5: -1
+Enter cost between office-1 and office-6: 5
+Enter cost between office-1 and office-7: -1
+Enter cost between office-2 and office-3: 12
+Enter cost between office-2 and office-4: -1
+Enter cost between office-2 and office-5: -1
+Enter cost between office-2 and office-6: -1
+Enter cost between office-2 and office-7: -1
+Enter cost between office-3 and office-4: 8
+Enter cost between office-3 and office-5: -1
+Enter cost between office-3 and office-6: -1
+Enter cost between office-3 and office-7: -1
+Enter cost between office-4 and office-5: 16
+Enter cost between office-4 and office-6: -1
+Enter cost between office-4 and office-7: 14
+Enter cost between office-5 and office-6: 20
+Enter cost between office-5 and office-7: 18
+Enter cost between office-6 and office-7: -1
+
+
+1.Enter graph
+2.Get path
+Enter choice: 2
+Spanning tree: 1->6->5->4->3->2->7->end
+Cost: 75
+
+
+1.Enter graph
+2.Get path
+Enter choice: -1
+*/

@@ -422,3 +422,193 @@ void Tree::iterativeInorder(Node *p)
         }
     }
 }
+/*
+Enter the data for tree: 
+Enter data(Enter -1 to stop):  33
+
+Enter left child of 33
+Enter data(Enter -1 to stop):  12
+
+Enter left child of 12
+Enter data(Enter -1 to stop):  19
+
+Enter left child of 19
+Enter data(Enter -1 to stop):  -1
+
+Enter right child of 19
+Enter data(Enter -1 to stop):  -1
+
+Enter right child of 12
+Enter data(Enter -1 to stop):  25
+
+Enter left child of 25
+Enter data(Enter -1 to stop):  -1
+
+Enter right child of 25
+Enter data(Enter -1 to stop):  -1
+
+Enter right child of 33
+Enter data(Enter -1 to stop):  45
+
+Enter left child of 45
+Enter data(Enter -1 to stop):  35
+
+Enter left child of 35
+Enter data(Enter -1 to stop):  -1
+
+Enter right child of 35
+Enter data(Enter -1 to stop):  -1
+
+Enter right child of 45
+Enter data(Enter -1 to stop):  21
+
+Enter left child of 21
+Enter data(Enter -1 to stop):  -1
+
+Enter right child of 21
+Enter data(Enter -1 to stop):  -1
+
+
+MENU
+1.RECURSIVE TRAVERSAL
+2.ITERATIVE TRAVERSAL
+3.NUMBER OF LEAVES,NODES AND HEIGHT
+4.SWAP CHILDREN
+5.COPY TREE
+6.ERASE NODES
+
+Enter your choice(-1 to exit): 1
+
+RECURSIVE TRAVERSALS:-
+IN-ORDER TRAVERSAL: 19 12 25 33 35 45 21 
+PRE-ORDER TRAVERSAL: 33 12 19 25 45 35 21 
+POST-ORDER TRAVERSAL: 19 25 12 35 21 45 33 
+
+MENU
+1.RECURSIVE TRAVERSAL
+2.ITERATIVE TRAVERSAL
+3.NUMBER OF LEAVES,NODES AND HEIGHT
+4.SWAP CHILDREN
+5.COPY TREE
+6.ERASE NODES
+
+Enter your choice(-1 to exit): 2
+
+ITERATIVE TRAVERSALS:-
+IN-ORDER: 19 12 25 33 35 45 21 
+PRE-ORDER: 33 12 19 25 45 35 21 
+POST-ORDER: 19 25 12 35 21 45 33 
+
+MENU
+1.RECURSIVE TRAVERSAL
+2.ITERATIVE TRAVERSAL
+3.NUMBER OF LEAVES,NODES AND HEIGHT
+4.SWAP CHILDREN
+5.COPY TREE
+6.ERASE NODES
+
+Enter your choice(-1 to exit): 3
+
+The number of leaves in tree is: 4
+The number of nodes in tree is: 7
+HEIGHT: 3
+
+MENU
+1.RECURSIVE TRAVERSAL
+2.ITERATIVE TRAVERSAL
+3.NUMBER OF LEAVES,NODES AND HEIGHT
+4.SWAP CHILDREN
+5.COPY TREE
+6.ERASE NODES
+
+Enter your choice(-1 to exit): 4
+
+
+MENU
+1.RECURSIVE TRAVERSAL
+2.ITERATIVE TRAVERSAL
+3.NUMBER OF LEAVES,NODES AND HEIGHT
+4.SWAP CHILDREN
+5.COPY TREE
+6.ERASE NODES
+
+Enter your choice(-1 to exit): 1
+
+RECURSIVE TRAVERSALS:-
+IN-ORDER TRAVERSAL: 21 45 35 33 25 12 19 
+PRE-ORDER TRAVERSAL: 33 45 21 35 12 25 19 
+POST-ORDER TRAVERSAL: 21 35 45 25 19 12 33 
+
+MENU
+1.RECURSIVE TRAVERSAL
+2.ITERATIVE TRAVERSAL
+3.NUMBER OF LEAVES,NODES AND HEIGHT
+4.SWAP CHILDREN
+5.COPY TREE
+6.ERASE NODES
+
+Enter your choice(-1 to exit): 5
+
+Tree copied!
+Traversals on copied tree: 
+IN-ORDER: 21 45 35 33 25 12 19 
+PRE-ORDER: 33 45 21 35 12 25 19 
+POST-ORDER: 21 35 45 25 19 12 33 
+
+MENU
+1.RECURSIVE TRAVERSAL
+2.ITERATIVE TRAVERSAL
+3.NUMBER OF LEAVES,NODES AND HEIGHT
+4.SWAP CHILDREN
+5.COPY TREE
+6.ERASE NODES
+
+Enter your choice(-1 to exit): 6
+
+
+MENU
+1.RECURSIVE TRAVERSAL
+2.ITERATIVE TRAVERSAL
+3.NUMBER OF LEAVES,NODES AND HEIGHT
+4.SWAP CHILDREN
+5.COPY TREE
+6.ERASE NODES
+
+Enter your choice(-1 to exit): 1
+
+RECURSIVE TRAVERSALS:-
+IN-ORDER TRAVERSAL: 
+Tree does not exist!!!
+PRE-ORDER TRAVERSAL: 
+Tree does not exist!!!
+POST-ORDER TRAVERSAL: 
+Tree does not exist!!!
+
+MENU
+1.RECURSIVE TRAVERSAL
+2.ITERATIVE TRAVERSAL
+3.NUMBER OF LEAVES,NODES AND HEIGHT
+4.SWAP CHILDREN
+5.COPY TREE
+6.ERASE NODES
+
+Enter your choice(-1 to exit): 2
+
+ITERATIVE TRAVERSALS:-
+IN-ORDER: 
+Tree does not exist!!!
+PRE-ORDER: 
+Tree does not exist!!!
+POST-ORDER: 
+Tree does not exist!!!
+
+MENU
+1.RECURSIVE TRAVERSAL
+2.ITERATIVE TRAVERSAL
+3.NUMBER OF LEAVES,NODES AND HEIGHT
+4.SWAP CHILDREN
+5.COPY TREE
+6.ERASE NODES
+
+Enter your choice(-1 to exit): -1
+*/

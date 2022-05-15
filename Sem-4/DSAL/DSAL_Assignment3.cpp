@@ -267,3 +267,76 @@ int main()
 	}
 	return 0;
 }
+/*
+
+MENU
+1.Insert
+2.Inorder
+3.preOrder
+Enter your choice(-1 to exit): 1
+
+Enter the value: 35
+
+Enter value of left side of 35
+Enter the value: 23
+
+Enter value of left side of 23
+Enter the value: 13
+
+Enter value of left side of 13
+Enter the value: -1
+
+Enter value of right side of 13
+Enter the value: -1
+
+Enter value of right side of 23
+Enter the value: 27
+
+Enter value of left side of 27
+Enter the value: -1
+
+Enter value of right side of 27
+Enter the value: -1
+
+Enter value of right side of 35
+Enter the value: 55
+
+Enter value of left side of 55
+Enter the value: 42
+
+Enter value of left side of 42
+Enter the value: -1
+
+Enter value of right side of 42
+Enter the value: -1
+
+Enter value of right side of 55
+Enter the value: 39
+
+Enter value of left side of 39
+Enter the value: -1
+
+Enter value of right side of 39
+Enter the value: -1
+
+
+MENU
+1.Insert
+2.Inorder
+3.preOrder
+Enter your choice(-1 to exit): 2
+13 23 27 35 42 55 39 
+
+MENU
+1.Insert
+2.Inorder
+3.preOrder
+Enter your choice(-1 to exit): 3
+35 23 13 27 55 42 39 
+
+MENU
+1.Insert
+2.Inorder
+3.preOrder
+Enter your choice(-1 to exit): -1
+*/

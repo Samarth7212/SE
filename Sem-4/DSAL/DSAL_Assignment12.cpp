@@ -146,3 +146,77 @@ int main()
 
     return 0;
 }
+/*
+1.Enter data
+2.Search data
+3.Delete data
+Enter: 1
+
+Enter name: Samarth Kamble
+Enter roll number: 21142
+Enter division: F1
+Enter address: Pune, Maharashtra
+
+Successfully added
+
+1.Enter data
+2.Search data
+3.Delete data
+Enter: 1
+
+Enter name: Test Student
+Enter roll number: 11111
+Enter division: F2
+Enter address: India
+
+Successfully added
+
+1.Enter data
+2.Search data
+3.Delete data
+Enter: 2
+
+Enter roll number: 21142
+
+Entry present
+Name: Samarth Kamble
+Roll number: 21142
+Division: F1
+Address: IndiaMaharashtra
+
+1.Enter data
+2.Search data
+3.Delete data
+Enter: 2
+
+Enter roll number: 11111
+
+Entry present
+Name: Test Student
+Roll number: 11111
+Division: F2
+Address: India
+
+1.Enter data
+2.Search data
+3.Delete data
+Enter: 3
+
+Enter roll number: 11111
+
+ Deleted roll number-11111
+
+1.Enter data
+2.Search data
+3.Delete data
+Enter: 2
+
+Enter roll number: 11111
+
+Could not find roll number-11111
+
+1.Enter data
+2.Search data
+3.Delete data
+Enter: -1
+*/

@@ -1,15 +1,13 @@
 /*
     Samarth (21142 F1-Batch)
     DSAL Assignment-2
+    Date of completion: 10/02/2022
 
     Problem Statement:
     A Dictionary stores keywords and its meanings. Provide facility for adding new keywords, deleting keywords,
     updating values of any entry. Provide facility to display whole data sorted in ascending/ Descending order.
     Also find how many maximum comparisons may require for finding any keyword. Use Binary Search Tree for
     implementation.
-
-    Date of completion: 10/02/2022
-
 */
 
 #include <iostream>
@@ -345,3 +343,104 @@ void BinarySearchTree::insert(string key, string meaning)
     else
         tail->right = tmp;
 }
+/*
+
+MENU
+1.ADD KEYWORD
+2.UPDATE KEYWORD
+3.DELETE KEYWORD
+4.SEARCH FOR A KEYWORD
+5.KEYWORDS IN ASCENDING AND DESCENDING ORDER
+ENTER YOUR CHOICE(-1 to exit): 1
+
+Enter keyword: C
+
+Enter meaning: Programming language
+
+Root created
+Height: 1
+
+
+MENU
+1.ADD KEYWORD
+2.UPDATE KEYWORD
+3.DELETE KEYWORD
+4.SEARCH FOR A KEYWORD
+5.KEYWORDS IN ASCENDING AND DESCENDING ORDER
+ENTER YOUR CHOICE(-1 to exit): 1
+
+Enter keyword: Python
+
+Enter meaning: language
+
+Height: 2
+
+
+MENU
+1.ADD KEYWORD
+2.UPDATE KEYWORD
+3.DELETE KEYWORD
+4.SEARCH FOR A KEYWORD
+5.KEYWORDS IN ASCENDING AND DESCENDING ORDER
+ENTER YOUR CHOICE(-1 to exit): 1
+
+Enter keyword: abcd
+
+Enter meaning: alphabets
+
+Height: 2
+
+
+MENU
+1.ADD KEYWORD
+2.UPDATE KEYWORD
+3.DELETE KEYWORD
+4.SEARCH FOR A KEYWORD
+5.KEYWORDS IN ASCENDING AND DESCENDING ORDER
+ENTER YOUR CHOICE(-1 to exit): 1
+
+Enter keyword: xyz
+
+Enter meaning: end alphabets
+
+Height: 3
+
+
+MENU
+1.ADD KEYWORD
+2.UPDATE KEYWORD
+3.DELETE KEYWORD
+4.SEARCH FOR A KEYWORD
+5.KEYWORDS IN ASCENDING AND DESCENDING ORDER
+ENTER YOUR CHOICE(-1 to exit): 4
+
+Enter the keyword: ABCD
+
+The meaning of ABCD is given as alphabets
+Comparisons: 2
+
+
+MENU
+1.ADD KEYWORD
+2.UPDATE KEYWORD
+3.DELETE KEYWORD
+4.SEARCH FOR A KEYWORD
+5.KEYWORDS IN ASCENDING AND DESCENDING ORDER
+ENTER YOUR CHOICE(-1 to exit): 5
+
+Keywords in ascending order: 
+ABCD C PYTHON XYZ 
+
+Keywords in descending order: 
+XYZ PYTHON C ABCD 
+
+
+MENU
+1.ADD KEYWORD
+2.UPDATE KEYWORD
+3.DELETE KEYWORD
+4.SEARCH FOR A KEYWORD
+5.KEYWORDS IN ASCENDING AND DESCENDING ORDER
+ENTER YOUR CHOICE(-1 to exit): -1
+
+*/
