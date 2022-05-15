@@ -1,7 +1,8 @@
 /*
     Samamrth Kamble
     21142 (F1-Batch)
-    
+    Date of completion: 12/05/22
+
     Problem Statement:
     Implement the Heap sort algorithm implemented in CPP/Java demonstrating heap
     data structure with modularity of programming language
@@ -39,9 +40,6 @@ public:
     }
     void deleteLast()
     {
-        // int root = heap[1];
-        // heap[1] = heap[last];
-        // heap[last] = root;
         swap(heap[last], heap[1]);
         int size = last;
         last--;
