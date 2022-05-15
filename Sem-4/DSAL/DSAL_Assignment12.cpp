@@ -92,23 +92,32 @@ public:
         cin >> rn;
         ifstream inf;
         inf.open("database", ios::in | ios::binary);
+        inf.seekg(0);
+        inf.clear();
         int x;
-        while (inf.read((char *)&std, sizeof(std)))
+        if (inf.is_open())
         {
-            if (std.rollNum == rn)
+            while (inf.read((char *)&std, sizeof(std)))
             {
-                flag = 1;
-                cout << "\nEntry present";
-                cout << "\nName: " << std.name;
-                cout << "\nRoll number: " << std.rollNum;
-                cout << "\nDivision: " << std.division;
-                cout << "\nAddress: " << std.address;
+                if (std.rollNum == rn)
+                {
+                    flag = 1;
+                    cout << "\nEntry present";
+                    cout << "\nName: " << std.name;
+                    cout << "\nRoll number: " << std.rollNum;
+                    cout << "\nDivision: " << std.division;
+                    cout << "\nAddress: " << std.address;
+                }
             }
+            if (!flag)
+                cout << "\nCould not find roll number-" << rn;
+            inf.close();
         }
-        if (!flag)
-            cout << "\nCould not find roll number-" << rn;
-        inf.close();
+        else
+            cout << "\nUnable to open";
     }
+
+    void removeDB() { remove("database"); }
 
 } * dt;
 
@@ -136,6 +145,7 @@ int main()
             break;
 
         case -1:
+            dt->removeDB();
             menu = 0;
             break;
 
