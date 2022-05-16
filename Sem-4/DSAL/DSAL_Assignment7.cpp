@@ -130,16 +130,12 @@ public:
         cout << "Spanning tree: ";
         cout << ST[0][0] << "->" << ST[1][0] << "->";
         for (int i = 1; i < vertices - 1; i++)
-        {
             cout << ST[0][i] << "->";
-        }
         cout << "end\n";
         cout << "Cost: ";
         int c = 0;
         for (int i = 0; i < vertices - 1; i++)
-        {
             c += cost[ST[0][i]][ST[1][i]];
-        }
         cout << c << endl;
     }
 
@@ -172,6 +168,7 @@ int main()
         case -1:
             menu = 0;
             break;
+            
         default:
             break;
         }

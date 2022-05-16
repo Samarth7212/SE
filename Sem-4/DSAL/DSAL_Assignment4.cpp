@@ -1,15 +1,15 @@
 /*
- Samarth Kamble
- 21142 (F1-Batch)
- Date of start: 21/03/2022
- Date of completion: 28/03/2022
+    Samarth Kamble
+    21142 (F1-Batch)
+    Date of start: 21/03/2022
+    Date of completion: 28/03/2022
 
- Problem statement:
- Consider telephone book database of N clients. Make use of a hash table
- implementation to quickly look up client‘s telephone number. Make use of two
- collision handling techniques and compare them using number of comparisons
- required to find a set of telephone numbers (use linear probing with replacement and
- without replacement)
+    Problem statement:
+    Consider telephone book database of N clients. Make use of a hash table
+    implementation to quickly look up client‘s telephone number. Make use of two
+    collision handling techniques and compare them using number of comparisons
+    required to find a set of telephone numbers (use linear probing with replacement and without
+    replacement)
  */
 #include <iostream>
 #define SIZE 123
@@ -26,22 +26,10 @@ public:
         this->name = "";
         this->phoneNumber = -1;
     }
-    long int getPhoneNumber()
-    {
-        return phoneNumber;
-    }
-    string getName()
-    {
-        return name;
-    }
-    void setPhoneNumber(long int number)
-    {
-        this->phoneNumber = number;
-    }
-    void setName(string name)
-    {
-        this->name = name;
-    }
+    long int getPhoneNumber() { return phoneNumber; }
+    string getName() { return name; }
+    void setPhoneNumber(long int number) { this->phoneNumber = number; }
+    void setName(string name) { this->name = name; }
 };
 
 class HashTable
@@ -66,10 +54,7 @@ public:
         int hashCode = multiplyDigits(key);
         return hashCode;
     }
-    HashTable()
-    {
-        entryCount = 0;
-    }
+    HashTable() { entryCount = 0; }
     void makeEntry();
     void insertWithoutReplacement(long, string);
     void insertionWithReplacement(long, string);

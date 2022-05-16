@@ -38,7 +38,7 @@ public:
         for (int i = 1; i <= last; i++)
             cout << heap[i] << sp;
     }
-    void deleteLast()
+    void heapSort()
     {
         swap(heap[last], heap[1]);
         int size = last;
@@ -90,7 +90,7 @@ int main()
             break;
 
         case 2:
-            HP->deleteLast();
+            HP->heapSort();
             break;
 
         case -1:
@@ -111,7 +111,7 @@ MENU
 ENTER: 1
 
 Enter element: 98
-98 
+98
 
 MENU
 1.Insert
@@ -119,7 +119,7 @@ MENU
 ENTER: 1
 
 Enter element: 23
-98 23 
+98 23
 
 MENU
 1.Insert
@@ -127,7 +127,7 @@ MENU
 ENTER: 1
 
 Enter element: 78
-98 23 78 
+98 23 78
 
 MENU
 1.Insert
@@ -135,7 +135,7 @@ MENU
 ENTER: 1
 
 Enter element: 25
-98 25 78 23 
+98 25 78 23
 
 MENU
 1.Insert
@@ -143,7 +143,7 @@ MENU
 ENTER: 1
 
 Enter element: 99
-99 98 78 23 25 
+99 98 78 23 25
 
 MENU
 1.Insert
@@ -151,7 +151,7 @@ MENU
 ENTER: 1
 
 Enter element: 69
-99 98 78 23 25 69 
+99 98 78 23 25 69
 
 MENU
 1.Insert
@@ -159,7 +159,7 @@ MENU
 ENTER: 1
 
 Enter element: 21
-99 98 78 23 25 69 21 
+99 98 78 23 25 69 21
 
 MENU
 1.Insert
@@ -167,7 +167,7 @@ MENU
 ENTER: 1
 
 Enter element: 28
-99 98 78 28 25 69 21 23 
+99 98 78 28 25 69 21 23
 
 MENU
 1.Insert
@@ -175,7 +175,7 @@ MENU
 ENTER: 1
 
 Enter element: 79
-99 98 78 79 25 69 21 23 28 
+99 98 78 79 25 69 21 23 28
 
 MENU
 1.Insert
@@ -183,7 +183,7 @@ MENU
 ENTER: 1
 
 Enter element: 77
-99 98 78 79 77 69 21 23 28 25 
+99 98 78 79 77 69 21 23 28 25
 
 MENU
 1.Insert
@@ -191,7 +191,7 @@ MENU
 ENTER: 1
 
 Enter element: 22
-99 98 78 79 77 69 21 23 28 25 22 
+99 98 78 79 77 69 21 23 28 25 22
 
 MENU
 1.Insert
@@ -199,14 +199,14 @@ MENU
 ENTER: 1
 
 Enter element: 1
-99 98 78 79 77 69 21 23 28 25 22 1 
+99 98 78 79 77 69 21 23 28 25 22 1
 
 MENU
 1.Insert
 2.Heap-Sort
 ENTER: 2
 
-Heap sort: 1 21 22 23 25 28 69 77 78 79 98 99 
+Heap sort: 1 21 22 23 25 28 69 77 78 79 98 99
 
 
 MENU

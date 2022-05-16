@@ -98,15 +98,6 @@ TR_Printing:
  
  	mov bx,[tr]
  	call HexToASCII
-
- 	IO 01, 01, msw_msg, msw_len
- 
- 	mov bx,[cr0_data+2]
- 	call HexToASCII
-
- 	mov bx,[cr0_data]
- 	call HexToASCII
-
  	IO 01, 01, newLine, len
 
 	mov rax, 60
