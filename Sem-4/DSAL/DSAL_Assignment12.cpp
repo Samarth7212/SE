@@ -126,7 +126,7 @@ public:
             int i = 1;
             while (fin.read((char *)&std, sizeof(std)))
             {
-                cout << "Student-" << (i++) << endl;
+                cout << "\nStudent-" << (i++);
                 cout << "\nName: " << std.name;
                 cout << "\nRoll number: " << std.rollNum;
                 cout << "\nDivision: " << std.division;
