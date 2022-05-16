@@ -117,6 +117,28 @@ public:
             cout << "\nUnable to open";
     }
 
+    void showAll()
+    {
+        ifstream fin;
+        fin.open("database", ios::in | ios::binary);
+        if (fin.is_open())
+        {
+            int i = 1;
+            while (fin.read((char *)&std, sizeof(std)))
+            {
+                cout << "Student-" << (i++) << endl;
+                cout << "\nName: " << std.name;
+                cout << "\nRoll number: " << std.rollNum;
+                cout << "\nDivision: " << std.division;
+                cout << "\nAddress: " << std.address;
+                cout << endl;
+            }
+            fin.close();
+        }
+        else
+            cout << "\nCould not open";
+    }
+
     void removeDB() { remove("database"); }
 
 } * dt;
@@ -128,7 +150,7 @@ int main()
     while (menu)
     {
         int ch;
-        cout << "\n\n1.Enter data\n2.Search data\n3.Delete data\nEnter: ";
+        cout << "\n\n1.Enter data\n2.Search data\n3.Delete data\n4.Show all\nEnter: ";
         cin >> ch;
         switch (ch)
         {
@@ -142,6 +164,10 @@ int main()
 
         case 3:
             dt->deleteData();
+            break;
+
+        case 4:
+            dt->showAll();
             break;
 
         case -1:
