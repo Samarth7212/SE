@@ -20,26 +20,13 @@ public:
     {
     private:
         int rollNum;
-        string name;
-        string address;
-        string division;
+        char name[100];
+        char address[100];
+        char division[100];
 
     public:
         friend class Database;
-        Student()
-        {
-            name = "";
-            rollNum = -1;
-            division = "";
-            address = "";
-        }
-        Student(string name, int roll, string div, string addr)
-        {
-            this->name = name;
-            this->rollNum = roll;
-            this->division = div;
-            this->address = addr;
-        }
+        Student() { rollNum = -1; }
     };
     Student std;
     void addData()
@@ -47,15 +34,15 @@ public:
         ofstream outf;
         cout << "\nEnter name: ";
         cin.ignore();
-        getline(cin, std.name);
+        cin.getline(std.name, 100);
         cout << "Enter roll number: ";
         cin >> std.rollNum;
         cout << "Enter division: ";
         cin >> std.division;
         cout << "Enter address: ";
         cin.ignore();
-        getline(cin, std.address);
-        outf.open("database", ios::app | ios::binary);
+        cin.getline(std.address, 100);
+        outf.open("database.dat", ios::app | ios::binary);
         outf.write((char *)&std, sizeof(std)) << flush;
         outf.close();
         cout << "\nSuccessfully added";
@@ -70,8 +57,8 @@ public:
         cin >> rn;
         ifstream fin;
         ofstream fout;
-        fout.open("newDB", ios::app | ios::binary);
-        fin.open("database", ios::in | ios::binary);
+        fout.open("newDB.dat", ios::app | ios::binary);
+        fin.open("database.dat", ios::in | ios::binary);
         while (fin.read((char *)&std, sizeof(std)))
         {
             if (std.rollNum == rn)
@@ -79,8 +66,8 @@ public:
             if (std.rollNum != rn)
                 fout.write((char *)&std, sizeof(std)) << flush;
         }
-        remove("database");
-        rename("newDB", "database");
+        remove("database.dat");
+        rename("newDB.dat", "database.dat");
         cout << (flag ? "\n Deleted roll number-" : "\nCould not find roll number-") << rn;
     }
 
@@ -91,7 +78,7 @@ public:
         cout << "\nEnter roll number: ";
         cin >> rn;
         ifstream inf;
-        inf.open("database", ios::in | ios::binary);
+        inf.open("database.dat", ios::in | ios::binary);
         inf.seekg(0);
         inf.clear();
         int x;
@@ -120,7 +107,7 @@ public:
     void showAll()
     {
         ifstream fin;
-        fin.open("database", ios::in | ios::binary);
+        fin.open("database.dat", ios::in | ios::binary);
         if (fin.is_open())
         {
             int i = 1;
@@ -139,7 +126,7 @@ public:
             cout << "\nCould not open";
     }
 
-    void removeDB() { remove("database"); }
+    void removeDB() { remove("database.dat"); }
 
 } * dt;
 
@@ -171,7 +158,7 @@ int main()
             break;
 
         case -1:
-            dt->removeDB();
+            // dt->removeDB();
             menu = 0;
             break;
 
